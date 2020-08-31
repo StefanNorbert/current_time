@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+import Clock from './Components/Clock';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -12,14 +14,6 @@ class App extends React.Component {
        console.log('App componentDidMount');
     }
 
-    shouldComponentUpdate(){
-       console.log('App shouldComponentUpdate');
-    }
-
-    componentDidUpdate(){
-       console.log('App componentDidUpdate');
-    }
-
     componentWillUnmount(){
        console.log('App componentWillUnmount');
     }
@@ -27,7 +21,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <Clock/>
     );
   }
 }
