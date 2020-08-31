@@ -5,6 +5,7 @@ import './Clock.css';
 class Clock extends React.Component {
     constructor(props) {
         super(props);
+        //xxx todo find an API for this
         this.state = {
             time: new Date()
         };

@@ -1,6 +1,7 @@
 .clock {
-    margin: 1rem;
-    min-width: 500px;
+    flex-basis: 100%;
+    margin: 1rem 0;
+    text-align: center;
 }
 
 .clock__location {
@@ -9,4 +10,16 @@
 
 .clock__time {
     font-size: 2rem;
+}
+
+@media all  and (min-width: 1000px) {
+    .clock {
+        flex-basis: 50%;
+    }
+}
+
+@media all  and (min-width: 1500px) {
+    .clock {
+        flex-basis: 33%;
+    }
 }
