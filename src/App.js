@@ -19,11 +19,17 @@ class App extends React.Component {
     }
 
 
-  render() {
-    return (
-      <Clock/>
-    );
-  }
+    render() {
+        return (
+            <div className="container">
+                <Clock/>
+                <Clock/>
+                <Clock/>
+                <Clock/>
+                <Clock/>
+            </div>
+        );
+    }
 }
 
 export default App;

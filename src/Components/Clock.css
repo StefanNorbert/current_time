@@ -1,0 +1,12 @@
+.clock {
+    margin: 1rem;
+    min-width: 500px;
+}
+
+.clock__location {
+    font-size: 1rem;
+}
+
+.clock__time {
+    font-size: 2rem;
+}
