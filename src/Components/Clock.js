@@ -42,17 +42,20 @@ class Clock extends React.Component {
                 const locations = (await getLocationsForArea('Europe')).data;
                 console.log("locations: ", locations);
 
-                const currentTime = (await getCurrentTime("Europe/Bucharest")).data.datetime;
+                const currentTime = (await getCurrentTime(this.props.location)).data.datetime;
+                console.log("currentTime: ", currentTime);
                 this.setState({
                     time: new Date(currentTime)
                 });
 
                 // Tick
+/*
                 this.intervalId = window.setInterval(() => {
                     this.setState({
                         time: new Date()
                     });
                 }, 1000);
+*/
 
             }
             catch (e) {
@@ -71,7 +74,7 @@ class Clock extends React.Component {
         return (
             <div className="clock">
                 <div className="clock__location">Oradea</div>
-                <div className="clock__time">{this.state.time.toLocaleString('ro-RO')}</div>
+                <div className="clock__time">{this.state.time.toLocaleString('ro-RO', {timeZone: this.props.location})}</div>
             </div>
         );
     }

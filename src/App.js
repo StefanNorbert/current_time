@@ -22,7 +22,8 @@ class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <Clock/>
+                <Clock location="Europe/Bucharest"/>
+                <Clock location="Europe/Budapest"/>
             </div>
         );
     }
