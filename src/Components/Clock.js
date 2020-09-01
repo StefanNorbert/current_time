@@ -27,6 +27,11 @@ const getCurrentTime = location => {
     });
 };
 
+Date.prototype.addSecs = function(s) {
+    this.setTime(this.getTime() + (s * 1000));
+    return this;
+};
+
 class Clock extends React.Component {
     constructor(props) {
         super(props);
@@ -49,13 +54,15 @@ class Clock extends React.Component {
                 });
 
                 // Tick
-/*
                 this.intervalId = window.setInterval(() => {
-                    this.setState({
-                        time: new Date()
-                    });
+                    this.setState(
+                       (prevState, props) => {
+                           return {
+                               time: prevState.time.addSecs(1)
+                           }
+                       }
+                    );
                 }, 1000);
-*/
 
             }
             catch (e) {
@@ -73,7 +80,7 @@ class Clock extends React.Component {
     render() {
         return (
             <div className="clock">
-                <div className="clock__location">Oradea</div>
+                <div className="clock__location">{this.props.location.substr(this.props.location.lastIndexOf("/")+1)}</div>
                 <div className="clock__time">{this.state.time.toLocaleString('ro-RO', {timeZone: this.props.location})}</div>
             </div>
         );
