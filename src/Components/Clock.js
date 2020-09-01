@@ -11,6 +11,13 @@ const getValidTimeZones = () => {
     });
 };
 
+const getLocationsForArea = area => {
+    const url = `http://worldtimeapi.org/api/timezone/${area}`;
+    return axios({
+        url
+    });
+};
+
 class Clock extends React.Component {
     constructor(props) {
         super(props);
@@ -22,27 +29,16 @@ class Clock extends React.Component {
     componentDidMount(){
         console.log('Clock componentDidMount');
         (async () => {
-            let validTimeZones = [];
+            let locations = [];
             try {
-                validTimeZones = (await getValidTimeZones()).data
+                locations = (await getLocationsForArea('Europe')).data
             }
             catch (e) {
                 console.error(e.message + '\n' + e.stack);
             }
-            finally {
-                console.log('finally');
-            }
-            validTimeZones = validTimeZones.filter(
-                // tz => !(tz.toLowerCase()).startsWith("africa")
-                //     && !(tz.toLowerCase()).startsWith("america")
-                //     && !(tz.toLowerCase()).startsWith("antarctica")
-                //     && !(tz.toLowerCase()).startsWith("asia")
-                //     && !(tz.toLowerCase()).startsWith("australia")
-                //     && !(tz.toLowerCase()).startsWith("atlantic")
-                tz => tz.toLowerCase().indexOf('bucharest') > -1
-                // Europe/Bucharest
-            );
-            console.log("validTimeZones: ", validTimeZones);
+            console.log("locations: ", locations);
+
+
             // Tick
 /*
             this.intervalId = window.setInterval(() => {
