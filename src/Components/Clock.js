@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import './Clock.css';
 
+/*
 const getValidTimeZones = () => {
     const url = "http://worldtimeapi.org/api/timezone";
 
@@ -10,9 +11,17 @@ const getValidTimeZones = () => {
         url
     });
 };
+*/
 
 const getLocationsForArea = area => {
     const url = `http://worldtimeapi.org/api/timezone/${area}`;
+    return axios({
+        url
+    });
+};
+
+const getCurrentTime = location => {
+    const url = `http://worldtimeapi.org/api/timezone/${location}`;
     return axios({
         url
     });
@@ -29,24 +38,26 @@ class Clock extends React.Component {
     componentDidMount(){
         console.log('Clock componentDidMount');
         (async () => {
-            let locations = [];
             try {
-                locations = (await getLocationsForArea('Europe')).data
+                const locations = (await getLocationsForArea('Europe')).data;
+                console.log("locations: ", locations);
+
+                const currentTime = (await getCurrentTime("Europe/Bucharest")).data.datetime;
+                this.setState({
+                    time: new Date(currentTime)
+                });
+
+                // Tick
+                this.intervalId = window.setInterval(() => {
+                    this.setState({
+                        time: new Date()
+                    });
+                }, 1000);
+
             }
             catch (e) {
                 console.error(e.message + '\n' + e.stack);
             }
-            console.log("locations: ", locations);
-
-
-            // Tick
-/*
-            this.intervalId = window.setInterval(() => {
-                this.setState({
-                    time: new Date()
-                });
-            }, 1000);
-*/
         })();
     }
 
